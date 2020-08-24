@@ -23,4 +23,9 @@ rm -rf ${cookie_path}
 date=$(date '+%Y-%m-%d %H:%M:%S')
 checkin_status=$(echo ${checkin} | jq '.msg')
 
+if [ "${checkin_status}" == "" ]
+then
+    checkin_status='"签到失败"'
+fi
+
 echo "[${date}] ${checkin_status}"
