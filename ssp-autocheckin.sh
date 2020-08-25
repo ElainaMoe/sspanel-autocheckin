@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PATH="/usr/local/bin:/usr/bin:/bin"
+
 # Your host
 url="https://****.best"
 # User email
