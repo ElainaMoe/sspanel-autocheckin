@@ -10,7 +10,7 @@
 然后执行，签到成功后，即可添加定时任务。
 
 ```bash
-bash /path/to/ssp-autocheckin.bash
+bash /path/to/ssp-autocheckin.sh
 [2020-08-24 14:05:18] "登录成功"
 [2020-08-24 14:05:19] "获得了 59 MB流量"
 ```
@@ -18,6 +18,6 @@ bash /path/to/ssp-autocheckin.bash
 如下：
 
 ```bash
-24 10 * * * bash /path/to/ssp-autocheckin.bash >> /path/to/ssp-autocheckin.log
+24 10 * * * bash /path/to/ssp-autocheckin.sh >> /path/to/ssp-autocheckin.log
 ```
 
