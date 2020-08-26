@@ -3,7 +3,7 @@
 PATH="/usr/local/bin:/usr/bin:/bin"
 
 # Check jq command exist
-if [ $(command -v jq) != "" ] 
+if [ $(command -v jq) == "" ] 
 then
     echo "依赖缺失: jq，查看 https://github.com/isecret/sspanel-autocheckin/blob/master/README.md 安装" && exit 1
 fi
