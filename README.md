@@ -8,6 +8,7 @@
 克隆或下载仓库 `ssp-autocheckin.sh` 脚本，复制 `env.example` 为 `.env` 并修改配置。
 
 ```
+cp env.example .env
 vim .env
 DOMAIN="https://****.best" # 域名
 USERNAME="EMAIL" # 登录名
