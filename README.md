@@ -5,7 +5,14 @@
 脚本依赖：
 - `jq` 安装命令: Ubuntu: `apt-get install jq`、CentOS: `yum install jq`、MacOS: `brew install jq`
 
-克隆或下载仓库 `ssp-autocheckin.sh` 脚本，编辑替换 `url`、`username` 和 `passwd` 变量值。
+克隆或下载仓库 `ssp-autocheckin.sh` 脚本，复制 `env.example` 为 `.env` 并修改配置。
+
+```
+vim .env
+DOMAIN="https://****.best" # 域名
+USERNAME="EMAIL" # 登录名
+PASSWD="PASSWORD" # 密码
+```
 
 然后执行，签到成功后，即可添加定时任务。
 
