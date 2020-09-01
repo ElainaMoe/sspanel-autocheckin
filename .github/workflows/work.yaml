@@ -1,0 +1,29 @@
+name: SSPanel_Auto_Checkin
+
+on:
+    push:
+    schedule:
+        - cron: 20 02 * * *
+
+env:
+    TZ: Asia/Shanghai
+    WORK_DOMAIN: ${{secrets.DOMAIN}}
+    WORK_USERNAME: ${{secrets.USERNAME}}
+    WORK_PASSWD: ${{secrets.PASSWD}}
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout codes
+              uses: actions/checkout@v2
+            
+            - name: Install depends
+              run: |
+                sudo apt-get update
+                sudo apt-get -y install curl jq
+
+            - name: Request API
+              run: |
+                bash ssp-autocheckin.sh
