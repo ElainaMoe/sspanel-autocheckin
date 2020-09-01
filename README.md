@@ -1,5 +1,7 @@
 # SSPanel 自动签到
 
+![SSPanel_Auto_Checkin](https://github.com/isecret/sspanel-autocheckin/workflows/SSPanel_Auto_Checkin/badge.svg)
+
 ## 使用方法
 
 ### 方式一：Github Actions（推荐）
