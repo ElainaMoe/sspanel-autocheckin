@@ -2,8 +2,13 @@ name: SSPanel_Auto_Checkin
 
 on:
     push:
+        branches:
+            - master
     schedule:
-        - cron: 20 02 * * *
+        - cron: 20 18 * * *
+    watch:
+        types: 
+            - started
 
 env:
     TZ: Asia/Shanghai
