@@ -48,7 +48,7 @@ echo ${checkin_text}
 
 date=$(date '+%Y-%m-%d %H:%M:%S')
 if [ "${PUSH_KEY}" == "" ]; then
-    push_status='"未配置推送 PUSH_KEY"' && exit 0
+    push_status='"未配置推送 PUSH_KEY"'
 else
     text="SSPanel Auto Checkin 签到结果"
     desp="站点: ${DOMAIN}"+$'\n\n'+"用户名: ${USERNAME}"+$'\n\n'+"${login_text}"+$'\n\n'+"${checkin_text}"+$'\n\n'
