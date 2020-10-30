@@ -8,7 +8,7 @@
 
 ### 方式一：Github Actions（推荐）
 
-Fork 该仓库，进入仓库后点击 `Settings`，右侧栏点击 `Secrets`，点击 `New secret`。分别添加 `DOMAIN`、`USERNAME` 和 `PASSWD` 的值，对应为你的 `域名`、`用户名` 和 `密码`。
+Fork 该仓库，进入仓库后点击 `Settings`，右侧栏点击 `Secrets`，点击 `New secret`。分别添加 `DOMAIN`、`USERNAME` 和 `PASSWD` 的值，对应为你的 `域名`、`用户名` 和 `密码`，如果你想接受 Server 酱微信通知，请配置 `PUSH_KEY` 的值。
 
 定时任务将于每天凌晨 `2:20` 分执行，如果需要修改请编辑 `.github/workflows/work.yaml` 中 `on.schedule.cron` 的值（注意，该时间时区为国际标准时区，国内时间需要 -8 Hours）。
 
@@ -25,14 +25,16 @@ vim .env
 DOMAIN="https://****.best" # 域名
 USERNAME="EMAIL" # 登录名
 PASSWD="PASSWORD" # 密码
+PUSH_KEY="PUSH_KEY" # Server 酱推送 SCKEY，非必填
 ```
 
 然后执行，签到成功后，即可添加定时任务。
 
 ```bash
 bash /path/to/ssp-autocheckin.sh
-[2020-08-24 14:05:18] "登录成功"
-[2020-08-24 14:05:19] "获得了 59 MB流量"
+[2020-10-30 11:20:24] "登录成功"
+[2020-10-30 11:20:25] "获得了 132 MB流量"
+[2020-10-30 11:20:26] "签到结果推送成功"
 ```
 
 如下：

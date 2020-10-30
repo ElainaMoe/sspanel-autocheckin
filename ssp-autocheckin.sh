@@ -8,7 +8,7 @@ if [ -f ${ENV_PATH} ]; then
     source ${ENV_PATH}
 fi
 
-if [ "${WORK_DOMAIN}" == "" ] || [ "${WORK_USERNAME}" == "" ] || [ "${WORK_PASSWD}" == "" ]; then
+if [ "${DOMAIN}" == "" ] || [ "${USERNAME}" == "" ] || [ "${PASSWD}" == "" ]; then
     echo "环境常量未配置，请正确配置 DOMAIN、USERNAME 和 PASSWD 值" && exit 1
 fi
 
@@ -18,7 +18,7 @@ fi
 
 COOKIE_PATH="./.ss-autocheckin.cook"
 
-login=$(curl "${WORK_DOMAIN}/auth/login" -d "email=${WORK_USERNAME}&passwd=${WORK_PASSWD}&code=" -c ${COOKIE_PATH} -L -k -s)
+login=$(curl "${DOMAIN}/auth/login" -d "email=${USERNAME}&passwd=${PASSWD}&code=" -c ${COOKIE_PATH} -L -k -s)
 
 date=$(date '+%Y-%m-%d %H:%M:%S')
 login_status=$(echo ${login} | jq '.msg')
@@ -27,9 +27,11 @@ if [ "${login_status}" == "" ]; then
     login_status='"登录失败"'
 fi
 
-echo "[${date}] ${login_status}"
+login_text="[${date}] ${login_status}"
 
-checkin=$(curl -k -s -d "" -b ${COOKIE_PATH} "${WORK_DOMAIN}/user/checkin")
+echo ${login_text}
+
+checkin=$(curl -k -s -d "" -b ${COOKIE_PATH} "${DOMAIN}/user/checkin")
 
 rm -rf ${COOKIE_PATH}
 
@@ -40,4 +42,26 @@ if [ "${checkin_status}" == "" ]; then
     checkin_status='"签到失败"'
 fi
 
-echo "[${date}] ${checkin_status}"
+checkin_text="[${date}] ${checkin_status}"
+
+echo ${checkin_text}
+
+date=$(date '+%Y-%m-%d %H:%M:%S')
+if [ "${PUSH_KEY}" == "" ]; then
+    push_status='"未配置推送 PUSH_KEY"' && exit 0
+else
+    text="SSPanel Auto Checkin 签到结果"
+    desp="站点: ${DOMAIN}"+$'\n\n'+"用户名: ${USERNAME}"+$'\n\n'+"${login_text}"+$'\n\n'+"${checkin_text}"+$'\n\n'
+    push=$(curl -k -s -d "text=${text}&desp=${desp}" "https://sc.ftqq.com/${PUSH_KEY}.send")
+    push_code=$(echo ${push} | jq '.errno')
+
+    if [ ${push_code} == 0 ]; then
+        push_status='"签到结果推送成功"'
+    else
+        push_status='"签到结果推送失败"'
+    fi
+fi
+
+push_text="[${date}] ${push_status}"
+
+echo ${push_text}
