@@ -12,9 +12,10 @@ on:
 
 env:
     TZ: Asia/Shanghai
-    WORK_DOMAIN: ${{secrets.DOMAIN}}
-    WORK_USERNAME: ${{secrets.USERNAME}}
-    WORK_PASSWD: ${{secrets.PASSWD}}
+    DOMAIN: ${{secrets.DOMAIN}}
+    USERNAME: ${{secrets.USERNAME}}
+    PASSWD: ${{secrets.PASSWD}}
+    PUSH_KEY: ${{secrets.PUSH_KEY}}
 
 jobs:
     build:
