@@ -1,0 +1,34 @@
+name: SSPanel_Auto_Checkin1
+
+on:
+    push:
+        branches:
+            - master
+    schedule:
+        - cron: 20 18 * * *
+    watch:
+        types: 
+            - started
+
+env:
+    TZ: Asia/Shanghai
+    DOMAIN: ${{secrets.DOMAIN}}
+    USERNAME: ${{secrets.USERNAME1}}
+    PASSWD: ${{secrets.PASSWD1}}
+    PUSH_KEY: ${{secrets.PUSH_KEY}}
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        if: github.event.repository.owner.id == github.event.sender.id  # 自己点的 start
+        steps:
+            - name: Checkout codes
+              uses: actions/checkout@v2
+            
+            - name: Install depends
+              run: |
+                sudo apt-get update
+                sudo apt-get -y install curl jq
+            - name: Request API
+              run: |
+                bash ssp-autocheckin.sh
