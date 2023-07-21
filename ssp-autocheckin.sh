@@ -53,7 +53,7 @@ else
     text="SSPanel Auto Checkin 签到结果"
     desp="站点: ${DOMAIN}"+$'\n\n'+"用户名: ${USERNAME}"+$'\n\n'+"${login_text}"+$'\n\n'+"${checkin_text}"+$'\n\n'
     push=$(curl -k -s -d "text=${text}&desp=${desp}" "https://sc.ftqq.com/${PUSH_KEY}.send")
-    push_code=$(echo ${push} | jq '.errno')
+    push_code=$(echo ${push} | jq '.data.errno')
 
     if [ ${push_code} == 0 ]; then
         push_status='"签到结果推送成功"'
